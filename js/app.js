@@ -10,11 +10,21 @@ angular
 
   .factory("LocationFactory",
   ["$resource",
-LocationFactoryFunction])
+  LocationFactoryFunction])
+
+  .factory("ActivityFactory",
+  ["$resource",
+    ActivityFactoryFunction])
+
+  .controller("ActivityShowController", [
+    "ActivityFactory",
+    "$stateParams",
+    ActivityShowControllerFunction
+  ])
 
   .controller("LocationShowController", [
     "LocationFactory",
-    "stateParams",
+    "$stateParams",
     LocationShowControllerFunction
   ]);
 
@@ -22,16 +32,26 @@ function LocationFactoryFunction($resource){
   return $resource("http://localhost:3000/locations/:id");
 }
 
+function ActivityFactoryFunction($resource){
+  return $resource("http://localhost:3000/locations/:id/activities/:id");
+}
+
 function LocationShowControllerFunction(LocationFactory, $stateParams){
   this.location = LocationFactory.get({id: $stateParams.id});
 }
 
-function LocationNewControllerFunction(LocationFactory){
-  this.location = new LocationFactory();
+function ActivityShowControllerFunction(ActivityFactory, $stateParams){
+  this.activity = ActivityFactory.get({id: $stateParams.id});
+}
+
+function ActivityNewControllerFunction(ActivityFactory){
+  this.activity = new ActivityFactory();
   this.create = function(){
-    this.location.$save()
+    this.activity.$save()
   }
 }
+
+
 
 function RouterFunction($stateProvider){
   $stateProvider
@@ -42,16 +62,25 @@ function RouterFunction($stateProvider){
     controllerAs: "vm"
   })
 
-  .state("locationNew", {
-    url: "/locations/new",
-    templateUrl: "js.ng-views/new.html",
-    controller: "LocationShowController",
-    controllerAs: "vm"
-  })
   .state("locationShow", {
     url: "/locations/:id",
     templateUrl: "js/ng-views/show.html",
     controller: "LocationShowController",
     controllerAs: "vm"
-  });
-}
+  })
+
+  .state("activityIndex", {
+    url: "/locations/:id/activities",
+    templateUrl: "js/ng-views/activitiesindex.html",
+    controller: "ActivityShowController",
+    controllerAs: "vm"
+  })
+
+  .state("activityShow", {
+    url: "/locations/:id/activities/:id",
+    templateUrl: "js/ng-views/activitiesshow.html",
+    controller: "ActivityShowController",
+    controllerAs: "vm"
+  })
+
+  }
