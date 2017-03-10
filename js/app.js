@@ -6,42 +6,52 @@ angular
   .config([
     "$stateProvider",
     RouterFunction
-  ]);
+  ])
 
-  .factory("ActivityFactory",
+  .factory("LocationFactory",
   ["$resource",
-ActivityFactoryFunction]);
+LocationFactoryFunction])
 
-  .controller("ActivityShowController", [
-    "ActivityFactory",
+  .controller("LocationShowController", [
+    "LocationFactory",
     "stateParams",
-    ActivityShowController
+    LocationShowControllerFunction
   ]);
 
-function ActivityFactoryFunction($resource){
-  return $resource("http://localhost:3000/activities/:id");
+function LocationFactoryFunction($resource){
+  return $resource("http://localhost:3000/locations/:id");
 }
 
-function ActivityShowControllerFunction(ActivityFactory, $stateParams){
-  this.activity = ActivityFactory.get({id: $stateParams.id});
+function LocationShowControllerFunction(LocationFactory, $stateParams){
+  this.location = LocationFactory.get({id: $stateParams.id});
 }
 
-$stateProvider
-  .state("activityIndex", {
-    url: "/activities",
+function LocationNewControllerFunction(LocationFactory){
+  this.location = new LocationFactory();
+  this.create = function(){
+    this.location.$save()
+  }
+}
+
+function RouterFunction($stateProvider){
+  $stateProvider
+  .state("locationIndex", {
+    url: "/locations",
     templateUrl: "js/ng-views/index.html",
-    controller: "ActivityIndexController",
+    controller: "LocationIndexController",
     controllerAs: "vm"
   })
-  .state("activityNew", {
-    url: "/activities/new",
+
+  .state("locationNew", {
+    url: "/locations/new",
     templateUrl: "js.ng-views/new.html",
-    controller: "ActivityShowController",
+    controller: "LocationShowController",
     controllerAs: "vm"
   })
-  .state("activityShow", {
-    url: "/activities/:id",
+  .state("locationShow", {
+    url: "/locations/:id",
     templateUrl: "js/ng-views/show.html",
-    controller: "ActivityShowController",
+    controller: "LocationShowController",
     controllerAs: "vm"
   });
+}
