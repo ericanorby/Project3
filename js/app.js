@@ -1,86 +1,93 @@
 angular
-  .module("touristApp", [
-    "ui.router",
-    "ngResource"])
+    .module("touristApp", [
+        "ui.router",
+        "ngResource"
+    ])
 
-  .config([
-    "$stateProvider",
-    RouterFunction
-  ])
+    .config([
+        "$stateProvider",
+        "$urlRouterProvider",
+        RouterFunction
+    ])
 
-  .factory("LocationFactory",
-  ["$resource",
-  LocationFactoryFunction])
+    .factory("LocationFactory", ["$http",
+        LocationFactoryFunction
+    ])
 
-  .factory("ActivityFactory",
-  ["$resource",
-    ActivityFactoryFunction])
+    .factory("ActivityFactory", ["$resource",
+        ActivityFactoryFunction
+    ])
 
-  .controller("ActivityShowController", [
-    "ActivityFactory",
-    "$stateParams",
-    ActivityShowControllerFunction
-  ])
+    .controller("ActivityController", [
+        "ActivityFactory",
+        "$stateParams",
+        ActivityControllerFunction
+    ])
 
-  .controller("LocationShowController", [
-    "LocationFactory",
-    "$stateParams",
-    LocationShowControllerFunction
-  ]);
+    .controller("LocationController", [
+        "LocationFactory",
+        "$timeout",
+        LocationControllerFunction
+    ]);
 
-function LocationFactoryFunction($resource){
-  return $resource("http://localhost:3000/locations/:id");
+function LocationFactoryFunction($http) {
+    return $http({
+        method: 'GET',
+        url: 'http://localhost:3000/locations.json'
+    });
 }
 
-function ActivityFactoryFunction($resource){
-  return $resource("http://localhost:3000/locations/:id/activities/:id");
+function ActivityFactoryFunction($resource) {
+    return $resource("http://localhost:3000/locations/:location_id/activities/:id");
 }
 
-function LocationShowControllerFunction(LocationFactory, $stateParams){
-  this.location = LocationFactory.get({id: $stateParams.id});
+function LocationControllerFunction(LocationFactory, $timeout) {
+    var vm = this;
+
+    var options = {
+        types: ['(cities)']
+    }
+
+    $timeout(function() {
+        var input = document.getElementById('search-box');
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+    })
+
+    LocationFactory.then(function successCallback(response) {
+        vm.location = response;
+    }, function errorCallback(response) {});
+    this.locationQuery = null;
+    this.alertLocation = function() {
+        console.log(this.locationQuery);
+    }
 }
 
-function ActivityShowControllerFunction(ActivityFactory, $stateParams){
-  this.activity = ActivityFactory.get({id: $stateParams.id});
-}
-
-function ActivityNewControllerFunction(ActivityFactory){
-  this.activity = new ActivityFactory();
-  this.create = function(){
-    this.activity.$save()
-  }
+function ActivityControllerFunction(ActivityFactory, $stateParams) {
+    // this.activity = ActivityFactory.get({
+    //     id: $stateParams.id
+    // });
 }
 
 
 
-function RouterFunction($stateProvider){
-  $stateProvider
-  .state("locationIndex", {
-    url: "/locations",
-    templateUrl: "js/ng-views/index.html",
-    controller: "LocationIndexController",
-    controllerAs: "vm"
-  })
 
-  .state("locationShow", {
-    url: "/locations/:id",
-    templateUrl: "js/ng-views/show.html",
-    controller: "LocationShowController",
-    controllerAs: "vm"
-  })
+function RouterFunction($stateProvider, $urlRouterProvider) {
+    $stateProvider
 
-  .state("activityIndex", {
-    url: "/locations/:id/activities",
-    templateUrl: "js/ng-views/activitiesindex.html",
-    controller: "ActivityShowController",
-    controllerAs: "vm"
-  })
+        .state("location", {
+            url: "/home",
+            templateUrl: "js/ng-views/location.html",
+            controller: "LocationController",
+            controllerAs: "vm"
+        })
 
-  .state("activityShow", {
-    url: "/locations/:id/activities/:id",
-    templateUrl: "js/ng-views/activitiesshow.html",
-    controller: "ActivityShowController",
-    controllerAs: "vm"
-  })
+        .state("activity", {
+            url: "/locations/:location_id/activities",
+            templateUrl: "js/ng-views/activity.html",
+            controller: "ActivityController",
+            controllerAs: "vm"
+        })
 
-  }
+    $urlRouterProvider.otherwise('/home');
+
+}

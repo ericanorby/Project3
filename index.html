@@ -8,23 +8,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular-resource.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA3VCF6KbfBgQxQYDb-5WJU_gydrWVAHU&libraries=places"></script>
     <script src="js/app.js"></script>
-    <script>
-      function initialize(){
-        var options = {
-          types: ['(cities)']
-        }
-        var input = document.getElementById('search-box');
-        var autocomplete = new google.maps.places.Autocomplete(input, options);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
     <title>Tourist App</title>
   </head>
 
   <body>
     <h1><a data-ui-sref="locationIndex">Tourist to Local</a></h1>
-    <input type="text" id="search-box" size="50"></input>
 
     <main data-ui-view></main>
   </body>
