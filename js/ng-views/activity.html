@@ -1,29 +1,22 @@
-<!-- <div class="category" id="food">
-  <div ng-repeat="activity in vm.activities | foodCategory">
-    <p>{{activity.name}}</p>
+<div class="category" id="food">
+  <select ng-model="vm.categoryFilter">
+    <option value="">Select Filter</option>
+    <option value="Sightseeing">Sightseeing</option>
+    <option value="Food">Food</option>
+  </select>
+  <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter}">
+    <a data-ui-sref="activity.details({activity_id: activity.id})">{{activity.name}}</a>
   </div>
 </div>
+<div data-ui-view></div>
 
-<div class="category" id="hotels">
-  <div ng-repeat="activity in vm.activities | hotelsCategory">
-    <p>{{activity.}}</p>
-  </div>
+
+<!-- <div>
+  Filters:
+  <span ng-click="vm.categoryFilter='Food'">Food</span>
 </div>
-
-<div class="category" id="nightlife">
-  <div ng-repeat="activity in vm.activities | nightlifeCategory">
-    <p>{{activity.name}}</p>
-  </div>
-</div>
-
-<div class="category" id="sightseeing">
-  <div ng-repeat="activity in vm.activities | sightseeingCategory">
-    <p>{{activity.name}}</p>
-  </div>
-</div>
-
-<div class="category" id="cultural attractions">
-  <div ng-repeat="activity in vm.activities | culturalCategory">
+<div class="category" id="food">
+  <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter}">
     <p>{{activity.name}}</p>
   </div>
 </div> -->
