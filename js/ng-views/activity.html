@@ -3,6 +3,7 @@
     <option value="">Select Filter</option>
     <option value="Sightseeing">Sightseeing</option>
     <option value="Food">Food</option>
+    <option value="Night Life">Night Life</option>
   </select>
   <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter}">
     <a data-ui-sref="activity.details({activity_id: activity.id})">{{activity.name}}</a>
@@ -10,7 +11,7 @@
 </div>
 <div data-ui-view></div>
 
-
+<!-- Comment: When I create div box images of the categories later. -->
 <!-- <div>
   Filters:
   <span ng-click="vm.categoryFilter='Food'">Food</span>

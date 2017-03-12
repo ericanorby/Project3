@@ -1,5 +1,7 @@
 activity show
-<p>{{vm.activityDetails.name}}</p>
-<p>{{vm.activityDetails.address}}</p>
-<p>{{vm.activityDetails.website_url}}</p>
-<p>{{vm.activityDetails.photo_url}}</p>
+<div>
+<p>Name: {{vm.activityDetails.name}}</p>
+<p>Address: {{vm.activityDetails.address}}</p>
+<a ng-href="{{vm.activityDetails.website_url}}">Website</a>
+<img ng-src="{{vm.activityDetails.photo_url}}"/>
+</div>
