@@ -66,9 +66,8 @@ function ActivityControllerFunction(ActivityFactory, $stateParams) {
     // this.activity = ActivityFactory.get({
     //     id: $stateParams.id
     // });
+    this.activities = activities;
 }
-
-
 
 
 function RouterFunction($stateProvider, $urlRouterProvider) {
@@ -89,5 +88,8 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
         })
 
     $urlRouterProvider.otherwise('/home');
+
+    
+    })
 
 }
