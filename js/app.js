@@ -28,7 +28,14 @@ angular
         "LocationFactory",
         "$timeout",
         LocationControllerFunction
-    ]);
+    ])
+
+    .controller("ActivityDetailsController", [
+      "ActivityFactory",
+      "$stateParams",
+      ActivityDetailsControllerFunction
+    ])
+
 
 function LocationFactoryFunction($http) {
     return $http({
@@ -62,32 +69,43 @@ function LocationControllerFunction(LocationFactory, $timeout) {
     }
 }
 
+function ActivityDetailsControllerFunction(ActivityFactory, $stateParams) {
+ var vm = this;
+ vm.activityDetails = activities
+  .filter(function(activity){
+    return activity.id == $stateParams.activity_id}
+  )[0];
+}
+
 function ActivityControllerFunction(ActivityFactory, $stateParams) {
     // this.activity = ActivityFactory.get({
     //     id: $stateParams.id
     // });
+    this.activities = activities;
 }
-
-
 
 
 function RouterFunction($stateProvider, $urlRouterProvider) {
     $stateProvider
-
         .state("location", {
             url: "/home",
             templateUrl: "js/ng-views/location.html",
             controller: "LocationController",
             controllerAs: "vm"
         })
-
         .state("activity", {
             url: "/locations/:location_id/activities",
             templateUrl: "js/ng-views/activity.html",
             controller: "ActivityController",
             controllerAs: "vm"
         })
+        .state("activity.details", {
+            url: "/:activity_id",
+            templateUrl: "js/ng-views/activity_details.html",
+            controller: "ActivityDetailsController",
+            controllerAs: "vm"
+        })
+
 
     $urlRouterProvider.otherwise('/home');
-
 }

@@ -1,20 +1,129 @@
 <!DOCTYPE html>
 <html ng-app="touristApp">
-  <head>
+
+<head>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.2/angular-resource.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBA3VCF6KbfBgQxQYDb-5WJU_gydrWVAHU&libraries=places"></script>
-    <script src="js/app.js"></script>
-    <title>Tourist App</title>
-  </head>
+    <script>
+        var locations = [{
+                name: "Paris, France",
+                id: 1
+            },
+            {
+                name: "District of Columbia, United States",
+                id: 2
+            },
+            {
+                name: "Berlin, Germany",
+                id: 3
+            }
+        ]
 
-  <body>
-    <h1><a data-ui-sref="locationIndex">Tourist to Local</a></h1>
+        var activities = [{
+                name: "Eiffel Tower",
+                address: "Eiffel Tower",
+                category: "Sightseeing",
+                photo_url: "http://cdn.history.com/sites/2/2015/04/hith-eiffel-tower-iStock_000016468972Large.jpg",
+                website_url: "https://en.wikipedia.org/wiki/Eiffel_Tower",
+                description: "I got to see the Eiffel Tower.",
+                locations_id: 1,
+                id: 1
+            },
+            {
+                name: "Le Grenir a Pain",
+                address: "12 rue de la gare 49100 Angers",
+                category: "Food",
+                photo_url: "http://legrenierapain.com/wp-content/uploads/2015/02/slide062-700px.jpg",
+                website_url: "http://legrenierapain.com/en/",
+                description: "Best Bakery in Paris.",
+                location_id: 1,
+                id: 2
+            },
+            {
+                name: "Dirty Dick",
+                address: "10, rue Frochot Paris 75009",
+                category: "Night Life",
+                photo_url: "https://scontent-iad3-1.xx.fbcdn.net/v/t31.0-8/885828_540458842660773_1168489680_o.jpg?oh=3a9c07905e8b7c5ab634fc9660f51d99&oe=592E2687",
+                website_url: "https://www.facebook.com/Dirty-Dick-504787289561262/",
+                description: "Great Bar!",
+                location_id: 1,
+                id: 3
+            },
+            {
+                name: "National Mall",
+                address: "Washington, DC 20565",
+                category: "Sightseeing",
+                photo_url: "https://upload.wikimedia.org/wikipedia/commons/8/8d/WashingtonDCMallAerialNavyPhoto_crop.jpg",
+                website_url: "https://www.nps.gov/nama/index.htm",
+                description: "The National Mall has it ALL.",
+                location_id: 2,
+                id: 4
+            },
+            {
+                name: "Thunder Burger and Bar",
+                address: "3056 M St NW, Washington, DC 20007",
+                category: "Food",
+                photo_url: "https://pursuitofhappyhourdc.files.wordpress.com/2013/11/img_6623.jpg",
+                website_url: "http://www.thunderburger.com/index1.html",
+                description: "Had a great burger.",
+                location_id: 2,
+                id: 5
+            },
+            {
+                name: "Kennedy Center",
+                address: "2700 F St NW, Washington, DC 20566",
+                category: "Night Life",
+                photo_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Kennedy_Center_seen_from_the_Potomac_River,_June_2010.jpg/1200px-Kennedy_Center_seen_from_the_Potomac_River,_June_2010.jpg",
+                website_url: "http://www.kennedy-center.org/",
+                description: "Saw Phantom of the Opera.",
+                location_id: 2,
+                id: 6
+            },
+            {
+                name: "Reichstag Building",
+                address: "Platz der Republik 1, 11011 Berlin, Germany",
+                category: "Sightseeing",
+                photo_url: "http://famouswonders.com/wp-content/uploads/2009/03/reichstag-building.jpg",
+                website_url: "http://www.bundestag.de/besuche/architektur/reichstag/",
+                description: "What a beautiful building.",
+                location_id: 3,
+                id: 7
+            },
+            {
+                name: "Facil",
+                address: "Potsdamer Straße 3, 10785 Berlin, Germany",
+                category: "Food",
+                photo_url: "http://www.restaurants-guide4u.com/restaurants/reference/135121/03_Sterne_Restaurant_Facil_Berlin.jpg",
+                website_url: "http://www.facil.de/",
+                description: "The food was amazing.",
+                location_id: 3,
+                id: 8
+            },
+            {
+                name: "Vater Bar",
+                address: "Reuterstraße 27, 12047 Berlin, Germany",
+                category: "Night Life",
+                photo_url: "https://scontent-iad3-1.xx.fbcdn.net/v/t31.0-8/12419014_1118448904840641_8277815375063902808_o.jpg?oh=43166103b645edb03ee88d950efec323&oe=596BC9A1",
+                website_url: "https://www.facebook.com/vaterbarneukoelln/",
+                description: "Great Drinks!",
+                location_id: 3,
+                id: 9
+            }
+        ]
+    </script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Tourist App</title>
+</head>
+
+<body>
+    <h1><a data-ui-sref="location">Tourist to Local</a></h1>
 
     <main data-ui-view></main>
-  </body>
+</body>
 
 </html>
