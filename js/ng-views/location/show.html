@@ -1,8 +1,11 @@
-<div class="activity-index">
-
+<div class="location-show">
     <nav></nav>
 
-    <div class="category" id="food">
+    <div ng-repeat="location in vm.locations">
+      <p>{{location.name}}</p>
+    </div>
+
+    <!-- <div class="category" id="food">
         <select ng-model="vm.categoryFilter">
             <option value="">Select Category</option>
             <option value="Sightseeing">Sightseeing</option>
@@ -10,10 +13,10 @@
             <option value="Night Life">Night Life</option>
         </select>
         <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter}">
-            <a data-ui-sref="activity.details({activity_id: activity.id})">{{activity.name}}</a>
+            <a data-ui-sref="location.activities({activity_id: activity.id})">{{activity.name}}</a>
         </div>
     </div>
-    <div data-ui-view></div>
+    <div data-ui-view></div> -->
 
 </div>
 

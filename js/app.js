@@ -10,7 +10,7 @@ angular
     RouterFunction
   ])
 
-  .factory("LocationFactory", ["$http",
+  .factory("LocationFactory", ["$resource",
     LocationFactoryFunction
   ])
 
@@ -19,14 +19,11 @@ angular
   ])
 
   .controller("HomeController", [
-    "LocationFactory",
-    "$timeout",
     HomeControllerFunction
   ])
 
   .controller("LocationShowController", [
-    "ActivityFactory",
-    "$stateParams",
+    "LocationFactory",
     LocationShowControllerFunction
   ])
 
@@ -39,40 +36,37 @@ angular
 
 function RouterFunction($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state("location", {
+    .state("home", {
       url: "/home",
-      templateUrl: "js/ng-views/location/index.html",
-      controller: "LocationIndexController",
+      templateUrl: "js/ng-views/home.html",
+      controller: "HomeController",
       controllerAs: "vm"
     })
-    .state("activity", {
-      url: "/locations/:location_id/activities",
-      templateUrl: "js/ng-views/activity/index.html",
-      controller: "ActivityIndexController",
+    .state("location", {
+      url: "/locations",
+      templateUrl: "js/ng-views/location/show.html",
+      controller: "LocationShowController",
       controllerAs: "vm"
     })
-    .state("activity.details", {
+    .state("location.activities", {
       url: "/:activity_id",
       templateUrl: "js/ng-views/activity/show.html",
       controller: "ActivityShowController",
       controllerAs: "vm"
     })
 
-
   $urlRouterProvider.otherwise('/home');
 }
 
 function LocationFactoryFunction($resource) {
-  return $resource({
-    url: 'http://localhost:3000/locations/:id'
-  });
+  return $resource('http://localhost:3000/locations/:id.json');
 }
 
 function ActivityFactoryFunction($resource) {
-  return $resource("http://localhost:3000/locations/:location_id/activities/:id");
+  return $resource("http://localhost:3000/locations/:location_id/activities/:id.json");
 }
 
-function LocationIndexControllerFunction() {
+function HomeControllerFunction() {
 
   var options = {
     types: ['(cities)']
@@ -91,14 +85,14 @@ function LocationIndexControllerFunction() {
 
 }
 
-function LocationShowControllerFunction(ActivityFactory, $stateParams) {
-  // this.location = LocationFactory.get({id: $stateParams.id});
-  this.activities = ActivityFactory.query();
+function LocationShowControllerFunction(LocationFactory) {
+  this.locations = LocationFactory.query();
+  console.log(this.locations)
 }
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
-  this.activityDetails = activities
-    .filter(function(activity) {
-      return activity.id == $stateParams.activity_id
-    })[0];
+  // this.activityDetails = activities
+  //   .filter(function(activity) {
+  //     return activity.id == $stateParams.activity_id
+  //   })[0];
 }
