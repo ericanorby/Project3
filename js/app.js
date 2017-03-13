@@ -18,22 +18,22 @@ angular
         ActivityFactoryFunction
     ])
 
-    .controller("ActivityController", [
+    .controller("ActivityIndexController", [
         "ActivityFactory",
         "$stateParams",
-        ActivityControllerFunction
+        ActivityIndexControllerFunction
     ])
 
-    .controller("LocationController", [
+    .controller("LocationIndexController", [
         "LocationFactory",
         "$timeout",
-        LocationControllerFunction
+        LocationIndexControllerFunction
     ])
 
-    .controller("ActivityDetailsController", [
+    .controller("ActivityShowController", [
       "ActivityFactory",
       "$stateParams",
-      ActivityDetailsControllerFunction
+      ActivityShowControllerFunction
     ])
 
 
@@ -48,7 +48,7 @@ function ActivityFactoryFunction($resource) {
     return $resource("http://localhost:3000/locations/:location_id/activities/:id");
 }
 
-function LocationControllerFunction(LocationFactory, $timeout) {
+function LocationIndexControllerFunction(LocationFactory, $timeout) {
     var vm = this;
 
     var options = {
@@ -69,7 +69,7 @@ function LocationControllerFunction(LocationFactory, $timeout) {
     }
 }
 
-function ActivityDetailsControllerFunction(ActivityFactory, $stateParams) {
+function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
  var vm = this;
  vm.activityDetails = activities
   .filter(function(activity){
@@ -77,7 +77,7 @@ function ActivityDetailsControllerFunction(ActivityFactory, $stateParams) {
   )[0];
 }
 
-function ActivityControllerFunction(ActivityFactory, $stateParams) {
+function ActivityIndexControllerFunction(ActivityFactory, $stateParams) {
     // this.activity = ActivityFactory.get({
     //     id: $stateParams.id
     // });
@@ -89,20 +89,20 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state("location", {
             url: "/home",
-            templateUrl: "js/ng-views/location.html",
-            controller: "LocationController",
+            templateUrl: "js/ng-views/location/index.html",
+            controller: "LocationIndexController",
             controllerAs: "vm"
         })
         .state("activity", {
             url: "/locations/:location_id/activities",
-            templateUrl: "js/ng-views/activity.html",
-            controller: "ActivityController",
+            templateUrl: "js/ng-views/activity/index.html",
+            controller: "ActivityIndexController",
             controllerAs: "vm"
         })
         .state("activity.details", {
             url: "/:activity_id",
-            templateUrl: "js/ng-views/activity_details.html",
-            controller: "ActivityDetailsController",
+            templateUrl: "js/ng-views/activity/show.html",
+            controller: "ActivityShowController",
             controllerAs: "vm"
         })
 
