@@ -1,4 +1,37 @@
-#search-box {
-  padding: 5px;
+#search-box, button {
+  padding: 10px;
   font-size: 30px;
+}
+
+input:focus {
+  outline: none;
+}
+
+body {
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+}
+
+nav {
+  width: 30%;
+  background: lightgray;
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+.activity-index {
+  display: flex;
+  height: 100vh;
+}
+
+.activity-show img {
+  width: 200px;
 }

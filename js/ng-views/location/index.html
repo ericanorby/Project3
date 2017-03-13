@@ -1,6 +1,10 @@
-<input
-  ng-model="vm.locationQuery"
-  id="search-box"
-  type="text"
-></input>
-<button ui-sref="activity({ location_id: vm.locationQuery })">Submit</button>
+<div class="welcome flex">
+
+    <img ng-src="https://img.clipartfest.com/de10b73ac505c0553be7aff680ec7025_clip-art-of-world-clipart-clipart-of-world-globe_300-300.jpeg" />
+
+    <div>
+        <input ng-model="vm.locationQuery" id="search-box" type="text"></input>
+        <button ui-sref="activity({ location_id: vm.locationQuery })">Go</button>
+    </div>
+
+</div>
