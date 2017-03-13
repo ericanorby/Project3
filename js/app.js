@@ -43,7 +43,7 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
       controllerAs: "vm"
     })
     .state("location", {
-      url: "/locations",
+      url: "/locations/:id",
       templateUrl: "js/ng-views/location/show.html",
       controller: "LocationShowController",
       controllerAs: "vm"
@@ -85,9 +85,11 @@ function HomeControllerFunction() {
 
 }
 
-function LocationShowControllerFunction(LocationFactory) {
-  this.locations = LocationFactory.query();
+function LocationShowControllerFunction(LocationFactory, $stateParams) {
+  this.locations = LocationFactory.query()
   console.log(this.locations)
+  this.location = LocationFactory.get({id: $stateParams.id})
+  console.log(this.location)
 }
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {

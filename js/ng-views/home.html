@@ -1,10 +1,12 @@
-<div class="welcome flex">
+
+<div class="welcome">
 
     <img ng-src="css/globe.png" />
     <div>
+      <h2 class="intro">Everything travel, all in one place.</h2>
         <input ng-model="vm.locationQuery" id="search-box" size="25" type="text"></input>
         <!-- <button ui-sref="location({ location_id: vm.locationQuery })">Go</button> -->
-        <button ui-sref="location">Go</button>
+        <button ui-sref="location({id: vm.locationQuery})">GO</button>
     </div>
 
 </div>
