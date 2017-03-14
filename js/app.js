@@ -4,6 +4,20 @@ angular
     "ngResource"
   ])
 
+  // .directive("uniqueLocation", function(LocationFactory){
+  //   return {
+  //     restrict: "A",
+  //     require: "ngModel",
+  //     link: function (scope, element, attrs, ngModel) {
+  //       element.bind("blur", function(e) {
+  //         if (!ngModel || !element.val()) return;
+  //         var keyProperty = scope.$eval(attrs.uniqueLocation);
+  //         var currentValue = element.val();
+  //       })
+  //     }
+  //   }
+  // })
+
   .config([
     "$stateProvider",
     "$urlRouterProvider",
@@ -75,29 +89,35 @@ function ActivityFactoryFunction($resource) {
 
 function HomeControllerFunction(LocationFactory, $injector, $stateParams, $state) {
 
-  var options = {
-    types: ['(cities)']
-  }
   var input = document.getElementById('search-box');
-  var autocomplete = new google.maps.places.Autocomplete(input, options);
+  var autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+
+        IsplaceChange = true;
+    });
+
+    $("#search-box").keydown(function () {
+        IsplaceChange = false;
+    });
 
   this.location = new LocationFactory();
 
   this.create = function() {
-    // var userInput = document.getElementById('search-box').value
-    // console.log($injector.has(userInput))
-    // if (!$injector.has(userInput)) {
+    if (IsplaceChange == false) {
+        $("#search-box").val('');
+        alert("please enter valid location");
+    } else {
+    var userInput = $("#search-box").val();
+    console.log(userInput)
+    this.location.name = userInput
     this.location.$save(function(location) {
       $state.go('location', {
         id: location.id
       })
     })
-  // }
-  // else {
-  //   $state.go('location', {
-  //     id: find.id
-  //   })
-  // }
+  }
   };
 
 
