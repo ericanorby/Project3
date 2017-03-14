@@ -85,6 +85,7 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
     this.location.$save();
    };
 
+
 }
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams) {
