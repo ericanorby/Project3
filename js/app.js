@@ -50,6 +50,7 @@ angular
   ])
 
 
+
 function RouterFunction($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state("home", {
@@ -79,6 +80,7 @@ function LocationFactoryFunction($resource) {
 }
 
 function ActivityFactoryFunction($resource) {
+<<<<<<< Updated upstream
   return $resource("http://localhost:3000/locations/:location_id/activities/", {
     location_id: '@location_id',
     id: '@activity_id'
@@ -91,6 +93,19 @@ function ActivityFactoryFunction($resource) {
       isArray: true
     },
   });
+=======
+    return $resource("http://localhost:3000/locations/:location_id/activities/:activity_id", {
+        activity_id: '@activity_id'
+    }, {
+        'create': {
+            method: 'POST'
+        },
+        'query': {
+            method: 'GET',
+            isArray: true
+        },
+    });
+>>>>>>> Stashed changes
 }
 
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
@@ -154,12 +169,31 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
     }
   }
 
+<<<<<<< Updated upstream
   function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
+=======
+function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
+    var vm = this;
+    ActivityFactory.get({
+      location_id: $stateParams.id,
+      activity_id: $stateParams.activity_id
+    }, function(results) {
+      vm.activityshow = results
+
+    })
+
+    // this.ActivityFactory.get()
+>>>>>>> Stashed changes
     // this.activityDetails = activities
     //   .filter(function(activity) {
     //     return activity.id == $stateParams.activity_id
     //   })[0];
+<<<<<<< Updated upstream
   }
+=======
+console.log($stateParams)
+}
+>>>>>>> Stashed changes
 
   function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $scope, close) {
     $scope.addActivity = function() {
