@@ -69,7 +69,14 @@ function LocationFactoryFunction($resource) {
 }
 
 function ActivityFactoryFunction($resource) {
-  return $resource("http://localhost:3000/locations/:location_id/activities/:id.json");
+  return $resource("http://localhost:3000/locations/:location_id/activities/", {
+    location_id: '@location_id',
+    id: '@activity_id'
+  },
+  {
+    'create':   {method:'POST'},
+    'query':  {method:'GET', isArray:true},
+  });
 }
 
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
@@ -94,9 +101,22 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 }
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams) {
+  var vm = this;
   this.location = LocationFactory.get({id: $stateParams.id})
-  // this.activities = ActivityFactory.get({location_id: this.location.id})
-  // console.log(this.activities)
+  this.activities = ActivityFactory.query({location_id: $stateParams.id})
+  this.addActivity = function() {
+    var data = {
+      name: this.activityInput,
+      address: 'test adress',
+      category: 'Stuff',
+      photo_url: 'http://google.com',
+      website_url: 'http://yahoo.com',
+      description: 'description'
+    }
+    ActivityFactory.create({location_id: $stateParams.id}, data, function(result){
+      vm.activities.push(result);
+    })
+  }
 }
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
