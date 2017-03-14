@@ -89,3 +89,15 @@ a {
   from { background-position-x: 0px; }
   to { background-position-x: 210px; }
 }
+
+.modal {
+  border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 5px 5px grey;
+    top: 25%;
+    width: 800px;
+    position: fixed;
+    height: 300px;
+    background: white;
+    left: 18%;
+}
