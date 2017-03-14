@@ -20,6 +20,7 @@ angular
 
   .controller("HomeController", [
     "LocationFactory",
+    "$injector",
     "$stateParams",
     "$state",
     HomeControllerFunction
@@ -72,7 +73,7 @@ function ActivityFactoryFunction($resource) {
   return $resource("http://localhost:3000/locations/:location_id/activities/:id.json");
 }
 
-function HomeControllerFunction(LocationFactory, $stateParams, $state) {
+function HomeControllerFunction(LocationFactory, $injector, $stateParams, $state) {
 
   var options = {
     types: ['(cities)']
@@ -81,19 +82,37 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
   var autocomplete = new google.maps.places.Autocomplete(input, options);
 
   this.location = new LocationFactory();
-  this.create = function(){
-    this.location.$save();
-   };
+
+  this.create = function() {
+    // var userInput = document.getElementById('search-box').value
+    // console.log($injector.has(userInput))
+    // if (!$injector.has(userInput)) {
+    this.location.$save(function(location) {
+      $state.go('location', {
+        id: location.id
+      })
+    })
+  // }
+  // else {
+  //   $state.go('location', {
+  //     id: find.id
+  //   })
+  // }
+  };
 
 }
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams) {
-  this.location = LocationFactory.get({id: $stateParams.id})
-  // this.activities = ActivityFactory.get({location_id: this.location.id})
-  // console.log(this.activities)
+  this.location = LocationFactory.get({
+    id: $stateParams.id
+  })
+  this.activities = ActivityFactory.query({
+    location_id: $stateParams.id
+  })
 }
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
+
   // this.activityDetails = activities
   //   .filter(function(activity) {
   //     return activity.id == $stateParams.activity_id

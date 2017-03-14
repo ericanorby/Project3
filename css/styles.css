@@ -66,3 +66,7 @@ a {
 .activity-show img {
   width: 200px;
 }
+
+.activities-list {
+  padding: 30px;
+}
