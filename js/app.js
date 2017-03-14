@@ -94,7 +94,6 @@ function ActivityFactoryFunction($resource) {
 }
 
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
-
     var input = document.getElementById('search-box');
     var autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
@@ -124,7 +123,6 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
       })
     }
     };
-
 }
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams, $state, ModalService) {
