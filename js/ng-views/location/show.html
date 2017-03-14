@@ -11,7 +11,7 @@
                 <option value="Hotels">Hotel</option>
             </select>
             <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter}">
-                <a data-ui-sref="location.activities({activity_id: activity.id})">{{activity.name}}</a>
+      
             </div>
 
         </div>

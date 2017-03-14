@@ -29,6 +29,8 @@ body {
 header {
   text-align: center;
   font-size: 30px;
+  padding: 2px;
+  background: gray;
 }
 
 nav {

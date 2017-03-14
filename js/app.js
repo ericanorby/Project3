@@ -95,21 +95,34 @@ function ActivityFactoryFunction($resource) {
 
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
-    var options = {
-        types: ['(cities)']
-    }
     var input = document.getElementById('search-box');
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    var autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+          var place = autocomplete.getPlace();
+
+          IsplaceChange = true;
+      });
+
+      $("#search-box").keydown(function () {
+          IsplaceChange = false;
+      });
+
+    this.location = new LocationFactory();
 
     this.create = function() {
-        var data = {
-            name: input.value
-        }
-        LocationFactory.save(data, function(location) {
-            $state.go('location', {
-                id: location.id
-            })
-        });
+      if (IsplaceChange == false) {
+          $("#search-box").val('');
+          alert("Please enter valid location");
+      } else {
+      var userInput = $("#search-box").val();
+      console.log(userInput)
+      this.location.name = userInput
+      this.location.$save(function(location) {
+        $state.go('location', {
+          id: location.id
+        })
+      })
+    }
     };
 
 }
