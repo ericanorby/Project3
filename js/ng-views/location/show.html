@@ -2,9 +2,6 @@
     <nav></nav>
     <div class="activities-list">
         <h1>{{vm.location.name}}</h1>
-        <div ng-repeat="activity in vm.activities">
-            <p>{{activity.address}}</p>
-        </div>
         <div class="category" id="food">
             <select ng-model="vm.categoryFilter">
                 <option value="">Select Category</option>
