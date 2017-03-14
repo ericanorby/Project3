@@ -2,7 +2,7 @@
     <nav></nav>
     <div class="activities-list">
         <h1>{{vm.location.name}}</h1>
-        <a ui-sref="newActivity({id: $stateParams.id})">Add New Activity</a>
+        <a ui-sref="newActivity({location_id: vm.location.id})">Add New Activity</a>
         <div ng-repeat="activity in vm.activities">
           <p>{{activity.address}}</p>
         </div>

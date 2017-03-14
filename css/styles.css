@@ -71,7 +71,7 @@ a {
   padding: 30px;
 }
 
-#earth {
+/*#earth {
   width: 400px;
 	height: 400px;
 	background: url(http://www.animateonline.org/stillsfull/flatearth03.jpg);
@@ -88,4 +88,4 @@ a {
 @keyframes rotate {
   from { background-position-x: 0px; }
   to { background-position-x: 210px; }
-}
+}*/

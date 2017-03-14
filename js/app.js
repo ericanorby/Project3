@@ -61,7 +61,7 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
       controllerAs: "vm"
     })
     .state("newActivity", {
-      url: "/locations/:id/activities/new",
+      url: "/locations/:location_id/activities/new",
       templateUrl: "js/ng-views/activity/new.html",
       controller: "ActivityNewController",
       controllerAs: "vm"
