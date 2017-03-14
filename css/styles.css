@@ -41,6 +41,7 @@ nav {
 a {
   text-decoration: none;
   color: rgb(197, 221, 52);
+  cursor: pointer;
 }
 
 .welcome {
@@ -62,15 +63,26 @@ a {
 
 .location-show {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.activity-show img {
-  width: 200px;
+.main-content {
+  padding: 30px;
+  width: 80%;
+}
+
+.photo-div {
+  width: 160px;
+  height: 160px;
+  background-position: center;
+  background-size: cover;
+  margin: 20px;
 }
 
 .activities-list {
-  padding: 30px;
+  margin: 20px;
+  border: 1px solid gray;
+  display: flex;
 }
 
 #earth {
