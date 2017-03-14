@@ -100,6 +100,7 @@ function HomeControllerFunction(LocationFactory, $injector, $stateParams, $state
   // }
   };
 
+
 }
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams) {
