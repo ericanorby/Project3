@@ -34,7 +34,6 @@ angular
 
   .controller("HomeController", [
     "LocationFactory",
-    "$injector",
     "$stateParams",
     "$state",
     HomeControllerFunction
@@ -87,7 +86,7 @@ function ActivityFactoryFunction($resource) {
   return $resource("http://localhost:3000/locations/:location_id/activities/:id.json");
 }
 
-function HomeControllerFunction(LocationFactory, $injector, $stateParams, $state) {
+function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
   var input = document.getElementById('search-box');
   var autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
@@ -104,36 +103,42 @@ function HomeControllerFunction(LocationFactory, $injector, $stateParams, $state
 
   this.location = new LocationFactory();
 
-  this.create = function() {
-    if (IsplaceChange == false) {
-        $("#search-box").val('');
-        alert("please enter valid location");
-    } else {
-    var userInput = $("#search-box").val();
-    console.log(userInput)
-    this.location.name = userInput
-    this.location.$save(function(location) {
+  // this.create = function() {
+  //   if (IsplaceChange == false) {
+  //       $("#search-box").val('');
+  //       alert("please enter valid location");
+  //   } else {
+  //   var userInput = $("#search-box").val();
+  //   console.log(userInput)
+  //   this.location.name = userInput
+  //   this.location.$save(function(location) {
+  //     $state.go('location', {
+  //       id: location.id
+  //     })
+  //   })
+  // }
+  // };
+
+  this.create = function(){
+    var data = {
+      name: input.value
+    }
+    LocationFactory.save(data, function(location){
       $state.go('location', {
         id: location.id
       })
-    })
-  }
-  };
-
+    });
+   };
 
 }
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams) {
-  this.location = LocationFactory.get({
-    id: $stateParams.id
-  })
-  this.activities = ActivityFactory.query({
-    location_id: $stateParams.id
-  })
+  this.location = LocationFactory.get({id: $stateParams.id})
+  // this.activities = ActivityFactory.get({location_id: this.location.id})
+  // console.log(this.activities)
 }
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
-
   // this.activityDetails = activities
   //   .filter(function(activity) {
   //     return activity.id == $stateParams.activity_id
