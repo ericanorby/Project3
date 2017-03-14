@@ -134,8 +134,8 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams) {
   this.location = LocationFactory.get({id: $stateParams.id})
-  // this.activities = ActivityFactory.get({location_id: this.location.id})
-  // console.log(this.activities)
+  this.activities = ActivityFactory.query({location_id: $stateParams.id})
+  console.log(this.activities)
 }
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
