@@ -101,32 +101,32 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
   this.location = new LocationFactory();
 
-  // this.create = function() {
-  //   if (IsplaceChange == false) {
-  //       $("#search-box").val('');
-  //       alert("please enter valid location");
-  //   } else {
-  //   var userInput = $("#search-box").val();
-  //   console.log(userInput)
-  //   this.location.name = userInput
-  //   this.location.$save(function(location) {
-  //     $state.go('location', {
-  //       id: location.id
-  //     })
-  //   })
-  // }
-  // };
-
-  this.create = function(){
-    var data = {
-      name: input.value
-    }
-    LocationFactory.save(data, function(location){
+  this.create = function() {
+    if (IsplaceChange == false) {
+        $("#search-box").val('');
+        alert("Please enter valid location");
+    } else {
+    var userInput = $("#search-box").val();
+    console.log(userInput)
+    this.location.name = userInput
+    this.location.$save(function(location) {
       $state.go('location', {
         id: location.id
       })
-    });
-   };
+    })
+  }
+  };
+
+  // this.create = function(){
+  //   var data = {
+  //     name: input.value
+  //   }
+  //   LocationFactory.save(data, function(location){
+  //     $state.go('location', {
+  //       id: location.id
+  //     })
+  //   });
+  //  };
 
 }
 
