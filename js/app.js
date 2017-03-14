@@ -4,20 +4,6 @@ angular
     "ngResource"
   ])
 
-  // .directive("uniqueLocation", function(LocationFactory){
-  //   return {
-  //     restrict: "A",
-  //     require: "ngModel",
-  //     link: function (scope, element, attrs, ngModel) {
-  //       element.bind("blur", function(e) {
-  //         if (!ngModel || !element.val()) return;
-  //         var keyProperty = scope.$eval(attrs.uniqueLocation);
-  //         var currentValue = element.val();
-  //       })
-  //     }
-  //   }
-  // })
-
   .config([
     "$stateProvider",
     "$urlRouterProvider",
@@ -47,6 +33,12 @@ angular
     LocationShowControllerFunction
   ])
 
+  .controller("ActivityNewController", [
+    "ActivityFactory",
+    "$stateParams",
+    ActivityNewControllerFunction
+  ])
+
   .controller("ActivityShowController", [
     "ActivityFactory",
     "$stateParams",
@@ -68,8 +60,14 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
       controller: "LocationShowController",
       controllerAs: "vm"
     })
+    .state("newActivity", {
+      url: "/locations/:id/activities/new",
+      templateUrl: "js/ng-views/activity/new.html",
+      controller: "ActivityNewController",
+      controllerAs: "vm"
+    })
     .state("location.activities", {
-      url: "/:activity_id",
+      url: "/activities/:activity_id",
       templateUrl: "js/ng-views/activity/show.html",
       controller: "ActivityShowController",
       controllerAs: "vm"
@@ -135,7 +133,10 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams) {
   this.location = LocationFactory.get({id: $stateParams.id})
   this.activities = ActivityFactory.query({location_id: $stateParams.id})
-  console.log(this.activities)
+}
+
+function ActivityNewControllerFunction(ActivityFactory, $stateParams) {
+
 }
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
