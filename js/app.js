@@ -39,6 +39,7 @@ angular
         "ActivityFactory",
         "$stateParams",
         "ModalService",
+        "$state",
         ActivityShowControllerFunction
     ])
 
@@ -48,6 +49,7 @@ angular
         "$scope",
         "close",
         "activityData",
+        "$state",
         ActivityCreateModalControllerFunction
     ])
 
@@ -78,12 +80,12 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
 }
 
 function LocationFactoryFunction($resource) {
-    return $resource("http://localhost:3000/locations/:id.json");
+    return $resource("http://ventureforth.herokuapp.com/locations/:id.json");
 }
 
 function ActivityFactoryFunction($resource) {
 
-    return $resource("http://localhost:3000/locations/:location_id/activities/:activity_id", {
+    return $resource("http://ventureforth.herokuapp.com/locations/:location_id/activities/:activity_id", {
         location_id: '@location_id',
         activity_id: '@activity_id'
     }, {
@@ -190,7 +192,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
 }
 
 
-function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalService) {
+function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalService, $state) {
     var vm = this;
     var params = {
         location_id: $stateParams.location_id,
@@ -203,8 +205,9 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalServ
 
     this.delete = function() {
         ActivityFactory.delete(params, function(results) {
-            console.log(results);
-
+            $state.go('location', {
+                id: params.location_id
+            })
         })
 
     }
@@ -221,7 +224,7 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalServ
 }
 
 
-function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $scope, close, activityData) {
+function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $scope, close, activityData, $state) {
     //checks if activityData exists
     $scope.editMode = activityData ? true : false;
 
