@@ -107,6 +107,8 @@ var userInput;
 
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
+    $(".earth-two").hide()
+
     var input = document.getElementById('search-box');
     var autocomplete = new google.maps.places.Autocomplete(input, {
         types: ['(cities)']
@@ -129,50 +131,23 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
             alert("Please enter valid location");
         } else {
             var userInput = $("#search-box").val();
-            console.log(userInput)
             this.location.name = userInput
             this.location.$save(function(location) {
                 $state.go('location', {
                     id: location.id
                 })
             })
-
-            //find latitude and longitude of location selected (userInput)
-            function GetLatLong() {
-                var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    'address': userInput
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var latitude = results[0].geometry.location.lat();
-                        var longitude = results[0].geometry.location.lng();
-                        //AJAX request to weather underground
-                        var url = `http://api.wunderground.com/api/67e285089e02a77a/conditions/q/${latitude},${longitude}.json`
-                        $.ajax({
-                            url: url,
-                            type: "get",
-                            dataType: "json"
-                        }).done((response) => {
-                            console.log(response)
-                            var weather = response.current_observation
-                            $('#weather-info').append(`<p>${weather.feelslike_string}</p>
-                            <p>${weather.icon}</p>
-                            <img src="${weather.icon_url}">`)
-                        }).fail(() => {
-                            console.log("Ajax request fails!")
-                        })
-                    }
-                });
-            }
-            GetLatLong();
         };
     }
 }
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams, $state, ModalService) {
+
+    $(".earth-two").show()
+
     var vm = this;
-    this.location = LocationFactory.get({
-        id: $stateParams.id
+    this.location = LocationFactory.get({id: $stateParams.id}, () => {
+      this.getLatLong()
     })
     this.activities = ActivityFactory.query({
         location_id: $stateParams.id
@@ -185,6 +160,32 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
               activityData: null,
             }
         })
+    }
+    //find latitude and longitude of location selected (userInput)
+    this.getLatLong = function() {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'address': this.location.name
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                var latitude = results[0].geometry.location.lat();
+                var longitude = results[0].geometry.location.lng();
+                //AJAX request to weather underground
+                var url = `http://api.wunderground.com/api/67e285089e02a77a/conditions/q/${latitude},${longitude}.json`
+                $.ajax({
+                    url: url,
+                    type: "get",
+                    dataType: "json"
+                }).done((response) => {
+                    var weather = response.current_observation
+                    $('#weather-info').append(`<p>${weather.feelslike_string}</p>
+                    <p>${weather.icon}</p>
+                    <img src="${weather.icon_url}">`)
+                }).fail(() => {
+                    console.log("Ajax request fails!")
+                })
+            }
+        });
     }
 }
 
@@ -202,7 +203,7 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalServ
 
     this.delete = function() {
         ActivityFactory.delete(params, function(results) {
-            console.log(results);;
+            console.log(results);
 
         })
 

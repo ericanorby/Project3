@@ -1,11 +1,13 @@
-<a data-ui-sref="location({id:vm.activityshow.location_id})">Back</a>
 <div class="activity-show">
+<a data-ui-sref="location({id:vm.activityshow.location_id})">Back</a>
+
     <p> Name: {{vm.activityshow.name}}</p>
     <p> Address: {{vm.activityshow.address}}</p>
     <p> Category: {{vm.activityshow.category}}</p>
     <img ng-src="{{vm.activityshow.photo_url}}" />
     <a ng-href="{{vm.activityshow.website_url}}">Check Them Out</a>
     <p> Description: {{vm.activityshow.description}}</p>
-</div>
+
 <button ng-click="vm.edit()" class="edit">Edit Activity</button>
 <a data-ui-sref="location({id:vm.activityshow.location_id})"><button ng-click="vm.delete()" class="delete">Delete Activity</button></a>
+</div>

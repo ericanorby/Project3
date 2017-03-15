@@ -2,24 +2,30 @@ html * {
   font-family: 'ABeeZee', sans-serif;
 }
 
-button, .submit {
-  font-size: 20px;
-  padding: 10px 20px;
+button {
+  font-size: 16px;
+  padding: 6px 12px;
   border-radius: 5px;
-  margin: 15px;
-  background: rgb(98, 144, 173);
+  background: rgb(68, 105, 106);
   color: white;
+  margin-right: 10px;
+}
+
+input[type="submit"] {
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  background: rgb(68, 105, 106);
+  color: white;
+  margin-right: 10px;
 }
 
 #search-box {
-  font-size: 26px;
+  font-size: 22px;
   border: none;
-  border-bottom: 2px solid rgb(191, 226, 248);
+  border-bottom: 2px solid rgba(31, 146, 149, 0.2);
   padding: 10px;
-}
-
-#search-box::-webkit-input-placeholder {
-  color: rgb(181, 216, 238) !important;
+  margin: 30px 10px;
 }
 
 input:focus {
@@ -33,25 +39,54 @@ body {
 header {
   text-align: center;
   font-size: 30px;
-  padding: 2px;
-  /*background: gray;*/
+  padding: 20px;
+}
+
+footer {
+  padding: 20px;
+  color: white;
+  background: black;
+}
+
+footer span {
+  font-size: 12px;
 }
 
 nav {
   width: 16%;
   height: 200px;
-  background: rgb(230,230,230);
-  border: 1px solid rgb(210,210,210);
   position: fixed;
+  margin-left: 10px;
+  padding: 20px;
+}
+
+main {
+  min-height: 70vh;
+}
+
+nav h1 {
+  font-size: 18px;
 }
 
 .weather-div {
   width: 20%;
 }
 
+.category {
+  margin-right: 20px;
+}
+
+.search i {
+  font-size: 18px;
+}
+
+.search input {
+  font-size: 16px;
+  padding: 3px;
+}
+
 a {
   text-decoration: none;
-  /*color: rgb(197, 221, 52);*/
   color: rgb(133, 196, 94);
   cursor: pointer;
 }
@@ -91,7 +126,7 @@ a {
 }
 
 .main-content {
-  padding: 50px;
+  padding: 0 50px;
   width: 80%;
 }
 
@@ -100,42 +135,85 @@ a {
   height: 160px;
   background-position: center;
   background-size: cover;
-  margin: 20px;
+  margin-right: 20px;
 }
 
 .activities-list {
+  padding: 20px;
   margin: 20px 0;
   border: 1px solid gray;
   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   box-shadow: 5px 5px 5px gray;
+}
+
+.activities-list span {
+  float: right;
+  color: rgb(44, 134, 109);
+}
+
+.activities-list:hover {
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+.activities-list {
+  -webkit-transition: all 0.5s ease;
+  /* Safari and Chrome */
+  -moz-transition: all 0.5s ease;
+  /* Firefox */
+  -ms-transition: all 0.5s ease;
+  /* IE 9 */
+  -o-transition: all 0.5s ease;
+  /* Opera */
+  transition: all 0.5s ease;
+}
+
+.activity-show {
+  padding: 50px;
 }
 
 .activity-show img {
   width: 300px;
 }
 
-nav {
-  padding: 20px;
+.earth {
+  width: 400px;
+  height: 400px;
+  margin-right: 50px;
+  background: url(http://www.animateonline.org/stillsfull/flatearth03.jpg);
+  border-radius: 50%;
+  background-size: cover;
+  box-shadow: inset 16px 0 40px 6px rgb(0, 0, 0), inset -3px 0 6px 2px rgba(255, 255, 255, 0.2);
+  animation-name: rotate;
+  animation-duration: 15s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-#earth {
-  width: 400px;
-	height: 400px;
-  margin-right: 50px;
-	background: url(http://www.animateonline.org/stillsfull/flatearth03.jpg);
-	border-radius: 50%;
-	background-size: 800px;
-	box-shadow: inset 16px 0 40px 6px rgb(0, 0, 0),
-		inset -3px 0 6px 2px rgba(255, 255, 255, 0.2);
-	animation-name: rotate;
-	animation-duration: 15s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
+.earth-two {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes rotate {
-  from { background-position-x: 0px; }
-  to { background-position-x: 210px; }
+  from {
+    background-position-x: 0px;
+  }
+  to {
+    background-position-x: 210px;
+  }
 }
 
 .modal {
@@ -151,25 +229,38 @@ nav {
   right: 30%;
   z-index: 1;
 }
+
 .modal-background {
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Black w/ opacity */
 }
-form{margin-left: 30px;
+
+form {
+  margin-left: 30px;
 }
-.modalheader{
+
+.modalheader {
   text-align: center;
 }
-input, select{
+
+input, select {
   margin-bottom: 5px;
 }
-.modalheader, .close{
+
+.modalheader, .close {
   color: #6290ad;
 }
