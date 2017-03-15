@@ -66,7 +66,7 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
       controllerAs: "vm"
     })
     .state("location.activities", {
-      url: "locations/:id/activities/:activity_id",
+      url: "/activities/:activity_id",
       templateUrl: "js/ng-views/activity/show.html",
       controller: "ActivityShowController",
       controllerAs: "vm"
@@ -82,6 +82,7 @@ function LocationFactoryFunction($resource) {
 function ActivityFactoryFunction($resource) {
 
   return $resource("http://localhost:3000/locations/:location_id/activities/:activity_id", {
+    location_id: '@location_id',
     activity_id: '@activity_id'
   }, {
     'create': {
@@ -91,6 +92,9 @@ function ActivityFactoryFunction($resource) {
       method: 'GET',
       isArray: true
     },
+    'delete': {
+      method: 'DELETE'
+    }
   });
 }
 
@@ -193,6 +197,15 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
     vm.activityshow = results
 
   })
+  this.delete = function() {
+    var params = {
+      location_id: $stateParams.id,
+      activity_id: $stateParams.activity_id
+    }
+    ActivityFactory.delete(params, function(results){
+      console.log(results);
+    })
+  }
 }
 
 
