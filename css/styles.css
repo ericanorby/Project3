@@ -28,6 +28,13 @@ input[type="submit"] {
   margin: 30px 10px;
 }
 
+#map {
+  width: 250px;
+  height: 250px;
+  background: gray;
+  margin: 10px 0;
+}
+
 input:focus {
   outline: none;
 }
@@ -52,14 +59,6 @@ footer span {
   font-size: 12px;
 }
 
-nav {
-  width: 16%;
-  height: 200px;
-  position: fixed;
-  margin-left: 10px;
-  padding: 20px;
-}
-
 main {
   min-height: 70vh;
 }
@@ -68,8 +67,20 @@ nav h1 {
   font-size: 18px;
 }
 
-.weather-div {
-  width: 20%;
+.side-bar {
+  width: 300px;
+  position: fixed;
+  padding: 0 20px;
+}
+
+.side-bar h1 {
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+
+#weather-info {
+  display: flex;
+  align-items: center;
 }
 
 .category {
@@ -111,7 +122,7 @@ a {
 }
 
 .location-show {
-  display: flex;
+  /*display: flex;*/
   min-height: 100vh;
 }
 
@@ -126,8 +137,8 @@ a {
 }
 
 .main-content {
+  margin-left: 260px;
   padding: 0 50px;
-  width: 80%;
 }
 
 .photo-div {
