@@ -103,6 +103,8 @@ function ActivityFactoryFunction($resource) {
     });
 }
 
+var userInput;
+
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
     var input = document.getElementById('search-box');

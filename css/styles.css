@@ -7,15 +7,19 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   margin: 15px;
-  background: lightgray;
+  background: rgb(98, 144, 173);
   color: white;
 }
 
 #search-box {
   font-size: 26px;
   border: none;
-  border-bottom: 2px solid lightgray;
+  border-bottom: 2px solid rgb(191, 226, 248);
   padding: 10px;
+}
+
+#search-box::-webkit-input-placeholder {
+  color: rgb(181, 216, 238) !important;
 }
 
 input:focus {
@@ -30,17 +34,25 @@ header {
   text-align: center;
   font-size: 30px;
   padding: 2px;
-  background: gray;
+  /*background: gray;*/
 }
 
 nav {
+  width: 16%;
+  height: 200px;
+  background: rgb(230,230,230);
+  border: 1px solid rgb(210,210,210);
+  position: fixed;
+}
+
+.weather-div {
   width: 20%;
-  background: lightgray;
 }
 
 a {
   text-decoration: none;
-  color: rgb(197, 221, 52);
+  /*color: rgb(197, 221, 52);*/
+  color: rgb(133, 196, 94);
   cursor: pointer;
 }
 
@@ -48,6 +60,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 0 30px;
 }
 
@@ -59,6 +72,7 @@ a {
   position: absolute;
   top: 200px;
   font-weight: normal;
+  color: rgb(191, 167, 114);
 }
 
 .location-show {
@@ -66,8 +80,18 @@ a {
   min-height: 100vh;
 }
 
+.inline * {
+  display: inline-block;
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .main-content {
-  padding: 30px;
+  padding: 50px;
   width: 80%;
 }
 
@@ -80,19 +104,24 @@ a {
 }
 
 .activities-list {
-  margin: 20px;
+  margin: 20px 0;
   border: 1px solid gray;
   display: flex;
   box-shadow: 5px 5px 5px gray;
 }
 
+.activity-show img {
+  width: 300px;
+}
+
 nav {
-  padding: 10px;
+  padding: 20px;
 }
 
 #earth {
   width: 400px;
 	height: 400px;
+  margin-right: 50px;
 	background: url(http://www.animateonline.org/stillsfull/flatearth03.jpg);
 	border-radius: 50%;
 	background-size: 800px;
