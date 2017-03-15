@@ -1,7 +1,7 @@
 <div class="modal-background">
   <div id="openModal" class="modal">
       <div> <a title="Close" class="close" ng-click="closeModal()">X</a>
-          <h1>Add New Activity</h1>
+          <h1>Edit Activity</h1>
           <form class="add-form">
               <label>Name: <input type="text" ng-model="activityName" required/></label></br>
               <label>Address: <input type="text" ng-model="activityAddress" required/></label></br>
@@ -16,7 +16,7 @@
               <label>Photo Url<input type="url" ng-model="activityPhoto" required/></label></br>
               <label>Website Url<input type="url" ng-model="activityWebsite"required/></label></br>
               <label>Description: <input type="text" ng-model="activityDescription"required/></label></br>
-              <input type="submit" ng-click="addActivity()" required/>
+              <input type="submit" ng-click="modifyActivity()" required/>
           </form>
 
       </div>

@@ -202,13 +202,15 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalServ
 
     this.delete = function() {
         ActivityFactory.delete(params, function(results) {
-            console.log(results);
+            console.log(results);;
+
         })
+
     }
 
     this.edit = function() {
       ModalService.showModal({
-          templateUrl: "js/ng-views/activity/activity-creation-modal.html",
+          templateUrl: "js/ng-views/activity/activity-edit-modal.html",
           controller: "ActivityCreateModalController",
           inputs: {
             activityData: vm.activityshow,
