@@ -50,6 +50,7 @@ angular
   ])
 
 
+
 function RouterFunction($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state("home", {
@@ -64,12 +65,12 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
       controller: "LocationShowController",
       controllerAs: "vm"
     })
-  // .state("activityShow", {
-  //   url: "locations/:id/activities/:activity_id",
-  //   templateUrl: "js/ng-views/activity/show.html",
-  //   controller: "ActivityShowController",
-  //   controllerAs: "vm"
-  // })
+    .state("location.activities", {
+      url: "locations/:id/activities/:activity_id",
+      templateUrl: "js/ng-views/activity/show.html",
+      controller: "ActivityShowController",
+      controllerAs: "vm"
+    })
 
   $urlRouterProvider.otherwise('/home');
 }
@@ -79,9 +80,9 @@ function LocationFactoryFunction($resource) {
 }
 
 function ActivityFactoryFunction($resource) {
-  return $resource("http://localhost:3000/locations/:location_id/activities/", {
-    location_id: '@location_id',
-    id: '@activity_id'
+
+  return $resource("http://localhost:3000/locations/:location_id/activities/:activity_id", {
+    activity_id: '@activity_id'
   }, {
     'create': {
       method: 'POST'
@@ -100,7 +101,7 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
     types: ['(cities)']
   });
   google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    place = autocomplete.getPlace();
+    var place = autocomplete.getPlace();
 
     IsplaceChange = true;
   });
@@ -117,6 +118,7 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
       alert("Please enter valid location");
     } else {
       var userInput = $("#search-box").val();
+      console.log(userInput)
       this.location.name = userInput
       this.location.$save(function(location) {
         $state.go('location', {
@@ -143,8 +145,8 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
               console.log(response)
               var weather = response.current_observation
               $('#weather-info').append(`<p>${weather.feelslike_string}</p>
-                <p>${weather.icon}</p>
-                <img src="${weather.icon_url}">`)
+                            <p>${weather.icon}</p>
+                            <img src="${weather.icon_url}">`)
             }).fail(() => {
               console.log("Ajax request fails!")
             })
@@ -152,9 +154,9 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
         });
       }
       GetLatLong();
-    }
+    };
   }
-};
+}
 
 function LocationShowControllerFunction(LocationFactory, ActivityFactory, $stateParams, $state, ModalService) {
   var vm = this;
@@ -179,16 +181,20 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
     });
 
   }
-
-
 }
+
 
 function ActivityShowControllerFunction(ActivityFactory, $stateParams) {
-  // this.activityDetails = activities
-  //   .filter(function(activity) {
-  //     return activity.id == $stateParams.activity_id
-  //   })[0];
+  var vm = this;
+  ActivityFactory.get({
+    location_id: $stateParams.id,
+    activity_id: $stateParams.activity_id
+  }, function(results) {
+    vm.activityshow = results
+
+  })
 }
+
 
 function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $scope, close) {
   $scope.addActivity = function() {
@@ -210,4 +216,5 @@ function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $s
   $scope.closeModal = function() {
     close('close', 0);
   }
+
 }
