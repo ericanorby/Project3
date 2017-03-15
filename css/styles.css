@@ -162,6 +162,11 @@ nav {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
 }
-form{
-  
+form{margin-left: 30px;
+}
+.modalheader{
+  text-align: center;
+}
+input, select{
+  margin-bottom: 5px;
 }

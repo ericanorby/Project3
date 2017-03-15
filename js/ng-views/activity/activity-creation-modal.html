@@ -1,11 +1,11 @@
 <div class="modal-background">
   <div id="openModal" class="modal">
       <div> <a title="Close" class="close" ng-click="closeModal()">X</a>
-          <h1>Add New Activity</h1>
+          <h1 class="modalheader">Add New Activity</h1>
           <form class="add-form">
               <label>Name: <input type="text" ng-model="activityName" required/></label></br>
               <label>Address: <input type="text" ng-model="activityAddress" required/></label></br>
-              <label>Category </label>
+              <label>Category: </label>
               <select ng-model="activityCategory" required>
                 <option value="">Select Category</option>
                 <option value="Sightseeing">Sightseeing</option>
@@ -13,9 +13,9 @@
                 <option value="Night Life">Night Life</option>
                 <option value="Hotels">Hotel</option>
               </select></br>
-              <label>Photo Url<input type="url" ng-model="activityPhoto" required/></label></br>
-              <label>Website Url<input type="url" ng-model="activityWebsite"required/></label></br>
-              <label>Description: <input type="text" ng-model="activityDescription"required/></label></br>
+              <label>Photo Url: <input type="url" ng-model="activityPhoto" required/></label></br>
+              <label>Website Url: <input type="url" ng-model="activityWebsite"required/></label></br>
+              <label>Description: <textarea type="text" ng-model="activityDescription"required></textarea></label></br>
               <input type="submit" ng-click="addActivity()" required/>
           </form>
 
