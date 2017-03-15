@@ -16,7 +16,8 @@
               <label>Photo Url<input type="url" ng-model="activityPhoto" required/></label></br>
               <label>Website Url<input type="url" ng-model="activityWebsite"required/></label></br>
               <label>Description: <input type="text" ng-model="activityDescription"required/></label></br>
-              <input type="submit" ng-click="addActivity()" required/>
+              <input ng-if="!editMode" type="submit" ng-click="addActivity()" required/>
+              <input ng-if="editMode" type="submit" ng-click="modifyActivity()" required/>
           </form>
 
       </div>
