@@ -31,14 +31,13 @@
 
             <a data-ui-sref="activity({location_id:activity.location_id, activity_id: activity.id})">
                 <div class="activities-list">
-                    <div style="display:flex;">
                         <div class="photo-div" style="background-image: url('{{activity.photo_url}}')"></div>
-                        <div>
                             <h3>{{activity.name}}</h3>
                             <p>{{activity.address}}</p>
+                        <div class="category-text">
+                          <span>{{activity.category}}</span>
                         </div>
-                    </div>
-                    <span>{{activity.category}}</span>
+
                 </div>
 
             </a>

@@ -188,7 +188,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
 
     function initMap(latitude, longitude) {
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 5,
+          zoom: 8,
           center: new google.maps.LatLng(latitude, longitude)
         });
         var marker = new google.maps.Marker({

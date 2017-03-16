@@ -2,6 +2,10 @@ html * {
   font-family: 'ABeeZee', sans-serif;
 }
 
+body {
+  margin: 0 auto;
+}
+
 button {
   font-size: 16px;
   padding: 6px 12px;
@@ -39,14 +43,17 @@ input:focus {
   outline: none;
 }
 
-body {
-  margin: 0 auto;
-}
+
 
 header {
   text-align: center;
   font-size: 30px;
   padding: 20px;
+}
+
+header a {
+  font-family: 'Fredoka One', cursive;
+  text-transform: uppercase;
 }
 
 footer {
@@ -81,6 +88,10 @@ nav h1 {
 #weather-info {
   display: flex;
   align-items: center;
+}
+
+#weather-info img {
+  margin-left: 10px;
 }
 
 .category {
@@ -122,7 +133,6 @@ a {
 }
 
 .location-show {
-  /*display: flex;*/
   min-height: 100vh;
 }
 
@@ -150,18 +160,32 @@ a {
 }
 
 .activities-list {
+  height: 160px;
   padding: 20px;
   margin: 20px 0;
   border: 1px solid gray;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   box-shadow: 5px 5px 5px gray;
+  background: rgb(240,240,240);
+  position: relative;
 }
 
-.activities-list span {
-  float: right;
+.activities-list h3 {
+  font-size: 24px;
+  margin-top: 0;
+  color: black;
+}
+
+.photo-div {
+  float: left;
+}
+
+.category-text {
+  /*text-align: right;*/
   color: rgb(44, 134, 109);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
 }
 
 .activities-list:hover {
