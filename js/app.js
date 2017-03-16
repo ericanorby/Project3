@@ -51,7 +51,6 @@ angular
         "ActivityFactory",
         "$stateParams",
         "ModalService",
-        "$state",
         ActivityShowControllerFunction
     ])
 
@@ -61,7 +60,6 @@ angular
         "$scope",
         "close",
         "activityData",
-        "$state",
         ActivityCreateModalControllerFunction
     ])
 
@@ -165,9 +163,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
     }, () => {
         this.getLatLong()
     })
-    this.activities = ActivityFactory.query({
-        location_id: $stateParams.id
-    })
+    this.activities = ActivityFactory.query({location_id: $stateParams.id})
     this.addActivity = function() {
         ModalService.showModal({
             templateUrl: "js/ng-views/activity/activity-creation-modal.html",
@@ -206,15 +202,26 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
                     dataType: "json"
                 }).done((response) => {
                     var weather = response.current_observation
-                    $('#weather-info').append(`<p>${weather.feelslike_string}</p>
-                    <p>${weather.icon}</p>
+                    $('#weather-info').append(`<p>${weather.feelslike_string}<br>${weather.icon}</p>
                     <img src="${weather.icon_url}">`)
                 }).fail(() => {
                     console.log("Ajax request fails!")
                 })
+                initMap(latitude, longitude)
             }
         });
     }
+
+    function initMap(latitude, longitude) {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: new google.maps.LatLng(latitude, longitude)
+        });
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(latitude, longitude),
+          map: map
+        });
+      }
 }
 
 

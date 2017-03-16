@@ -1,11 +1,9 @@
 <div class="location-show">
 
-    <div class="weather-div">
-        <nav>
+    <div class="side-bar">
             <h1>Current Weather</h1>
-            <div id="weather-info">
-            </div>
-        </nav>
+            <div id="weather-info"></div>
+            <div id="map"></div>
     </div>
 
     <div class="main-content">
@@ -33,11 +31,10 @@
 
             <a data-ui-sref="activity({location_id:activity.location_id, activity_id: activity.id})">
                 <div class="activities-list">
-                    <div style="display:flex;">
                         <div class="photo-div" style="background-image: url('{{activity.photo_url}}')"></div>
-                        <div>
                             <h3>{{activity.name}}</h3>
                             <p>{{activity.address}}</p>
+<<<<<<< HEAD
                             <p>{{activity.category}}</p>
                         </div>
                     </div>
@@ -45,6 +42,12 @@
                       <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-click="vm.upVote($event, activity)"></i>
                       {{activity.upvote}}
                     </div>
+=======
+                        <div class="category-text">
+                          <span>{{activity.category}}</span>
+                        </div>
+
+>>>>>>> b8f3c5842ea3e881592bf6a858c38d9200fdc50f
                 </div>
 
             </a>
