@@ -6,22 +6,12 @@ body {
   margin: 0 auto;
 }
 
-button {
+button, input[type="submit"] {
   font-size: 16px;
   padding: 6px 12px;
   border-radius: 5px;
   background: rgb(68, 105, 106);
   color: white;
-  margin-right: 10px;
-}
-
-input[type="submit"] {
-  font-size: 16px;
-  padding: 6px 12px;
-  border-radius: 5px;
-  background: rgb(68, 105, 106);
-  color: white;
-  margin-right: 10px;
 }
 
 #search-box {
@@ -39,10 +29,9 @@ input[type="submit"] {
   margin: 10px 0;
 }
 
-input:focus {
+input:focus, button:focus {
   outline: none;
 }
-
 
 
 header {
@@ -255,15 +244,24 @@ a {
 .modal {
   border: 1px solid lightgray;
   border-radius: 5px;
-  padding: 15px;
+  padding: 10px 20px 40px 20px;
   box-shadow: 5px 5px 5px grey;
-  top: 25%;
+  top: 15%;
   width: 500px;
   position: fixed;
-  height: 300px;
+  /*height: 400px;*/
   background: white;
-  right: 30%;
+  right: 28%;
   z-index: 1;
+  text-align: right;
+}
+
+.modal i {
+  font-size: 20px;
+}
+
+.modal a {
+  text-align: left;
 }
 
 .modal-background {
@@ -286,15 +284,32 @@ a {
 }
 
 form {
-  margin-left: 30px;
+  margin: 0 40px;
+}
+
+.modal textarea, input[type="text"], input[type="url"] {
+  border: 1px solid lightgray;
+  font-size: 16px;
+  padding: 3px;
+  width: 75%;
+}
+
+.modal textarea {
+  resize: none;
+  height: 80px;
+  margin-top: 10px;
 }
 
 .modalheader {
   text-align: center;
 }
 
+select {
+  margin-right: 20px;
+}
+
 input, select {
-  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 .modalheader, .close {

@@ -16,28 +16,23 @@ angular
         "ngResource",
         "angularModalService"
     ])
-
     .config([
         "$stateProvider",
         "$urlRouterProvider",
         RouterFunction
     ])
-
     .factory("LocationFactory", ["$resource",
         LocationFactoryFunction
     ])
-
     .factory("ActivityFactory", ["$resource",
         ActivityFactoryFunction
     ])
-
     .controller("HomeController", [
         "LocationFactory",
         "$stateParams",
         "$state",
         HomeControllerFunction
     ])
-
     .controller("LocationShowController", [
         "LocationFactory",
         "ActivityFactory",
@@ -46,14 +41,12 @@ angular
         "ModalService",
         LocationShowControllerFunction
     ])
-
     .controller("ActivityShowController", [
         "ActivityFactory",
         "$stateParams",
         "ModalService",
         ActivityShowControllerFunction
     ])
-
     .controller("ActivityCreateModalController", [
         "ActivityFactory",
         "$stateParams",
@@ -62,8 +55,6 @@ angular
         "activityData",
         ActivityCreateModalControllerFunction
     ])
-
-
 
 function RouterFunction($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -85,7 +76,6 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
             controller: "ActivityShowController",
             controllerAs: "vm"
         })
-
     $urlRouterProvider.otherwise('/home');
 }
 
@@ -113,8 +103,6 @@ function ActivityFactoryFunction($resource) {
         }
     });
 }
-
-var userInput;
 
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
@@ -184,7 +172,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
         console.log(results);
       });
     }
-    //find latitude and longitude of location selected (userInput)
+    //find latitude and longitude of location name
     this.getLatLong = function() {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({
@@ -220,7 +208,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
           position: new google.maps.LatLng(latitude, longitude),
           map: map
         });
-      }
+    }
 }
 
 
