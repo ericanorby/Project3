@@ -4,19 +4,19 @@
             <a title="Close" class="close" ng-click="closeModal()"><i class="fa fa-times" aria-hidden="true"></i></a>
             <h1 class="modalheader">Add New Activity</h1>
             <form class="add-form">
-                <label>Name: <input type="text" ng-model="activityName" required/></label></br>
-                <label>Address: <input type="text" ng-model="activityAddress" required/></label></br>
-                <label>Photo Url: <input type="url" ng-model="activityPhoto" required/></label></br>
-                <label>Website Url: <input type="url" ng-model="activityWebsite"required/></label></br>
-                <label>Description: <textarea type="text" ng-model="activityDescription"required></textarea></label></br>
-                <select ng-model="activityCategory" required>
+                <label>Name: <input type="text" ng-model="activityName" /></label></br>
+                <label>Address: <input type="text" ng-model="activityAddress" /></label></br>
+                <label>Photo Url: <input type="url" ng-model="activityPhoto" /></label></br>
+                <label>Website Url: <input type="url" ng-model="activityWebsite"/></label></br>
+                <label>Description: <textarea type="text" ng-model="activityDescription"></textarea></label></br>
+                <select ng-model="activityCategory">
                     <option value="">Select Category</option>
                     <option value="Sightseeing">Sightseeing</option>
                     <option value="Food">Food</option>
                     <option value="Night Life">Night Life</option>
                     <option value="Hotels">Hotel</option>
                 </select>
-                <input class="submit" type="submit" ng-click="addActivity()" required/>
+                <input class="submit" type="submit" ng-click="addActivity()"/>
             </form>
         </div>
     </div>
