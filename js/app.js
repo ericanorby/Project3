@@ -194,7 +194,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
                 //AJAX request to weather underground
-                var url = `http://api.wunderground.com/api/67e285089e02a77a/conditions/q/${latitude},${longitude}.json`
+                var url = `https://api.wunderground.com/api/67e285089e02a77a/conditions/q/${latitude},${longitude}.json`
                 $.ajax({
                     url: url,
                     type: "get",
