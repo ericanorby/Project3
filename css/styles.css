@@ -131,6 +131,7 @@ a {
 .inline {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -155,6 +156,9 @@ a {
   box-shadow: 5px 5px 5px gray;
   background: rgb(240, 240, 240);
   position: relative;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .activities-list h3 {
@@ -168,7 +172,6 @@ a {
 }
 
 .category-text {
-  /*text-align: right;*/
   color: rgb(44, 134, 109);
   position: absolute;
   bottom: 0;
@@ -182,18 +185,6 @@ a {
   -ms-transform: scale(1.02);
   -o-transform: scale(1.02);
   transform: scale(1.02);
-}
-
-.activities-list {
-  -webkit-transition: all 0.5s ease;
-  /* Safari and Chrome */
-  -moz-transition: all 0.5s ease;
-  /* Firefox */
-  -ms-transition: all 0.5s ease;
-  /* IE 9 */
-  -o-transition: all 0.5s ease;
-  /* Opera */
-  transition: all 0.5s ease;
 }
 
 .activity-show {
@@ -302,14 +293,26 @@ form {
   text-align: center;
 }
 
-select {
+.modal select {
   margin-right: 20px;
 }
 
-input, select {
+.modal input, select {
   margin-top: 10px;
 }
 
 .modalheader, .close {
   color: #6290ad;
+}
+
+/*MEDIA QUERY*/
+
+@media only screen and (max-width: 767px){
+    #earth {
+      width: 200px;
+      height: 200px;
+    }
+    header h1 {
+      font-size: 40px;
+    }
 }
