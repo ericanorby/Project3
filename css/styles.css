@@ -107,7 +107,7 @@ a {
 
 .welcome {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   padding: 0 30px;
@@ -118,10 +118,9 @@ a {
 }
 
 .welcome h2 {
-  position: absolute;
-  top: 200px;
+  font-size: 34px;
   font-weight: normal;
-  color: rgb(191, 167, 114);
+  font-family: 'Satisfy', cursive;
 }
 
 .location-show {
