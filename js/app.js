@@ -78,12 +78,12 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
 }
 
 function LocationFactoryFunction($resource) {
-    return $resource("http://ventureforth.herokuapp.com/locations/:id.json");
+    return $resource("https://ventureforth.herokuapp.com/locations/:id.json");
 }
 
 function ActivityFactoryFunction($resource) {
 
-    return $resource("http://ventureforth.herokuapp.com/locations/:location_id/activities/:activity_id", {
+    return $resource("https://ventureforth.herokuapp.com/locations/:location_id/activities/:activity_id", {
         location_id: '@location_id',
         activity_id: '@activity_id'
     }, {
