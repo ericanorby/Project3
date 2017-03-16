@@ -34,17 +34,16 @@
                         <div class="photo-div" style="background-image: url('{{activity.photo_url}}')"></div>
                             <h3>{{activity.name}}</h3>
                             <p>{{activity.address}}</p>
-                            <p>{{activity.category}}</p>
+                            <div class="category-text">
+                              <span>{{activity.category}}</span>
+                            </div>
+                            <div class="upvote">
+                              <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-click="vm.upVote($event, activity)"></i>
+                              {{activity.upvote}}
+                            </div>
                         </div>
+
                     </div>
-                    <div class="upvote">
-                      <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-click="vm.upVote($event, activity)"></i>
-                      {{activity.upvote}}
-                    </div>
-                        <!-- <div class="category-text">
-                          <span>{{activity.category}}</span>
-                        </div> -->
-                </div>
 
             </a>
         </div>
