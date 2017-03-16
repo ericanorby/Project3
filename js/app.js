@@ -242,7 +242,6 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalServ
             $state.go('location', {
                 id: params.location_id
             })
-
         })
 
     }

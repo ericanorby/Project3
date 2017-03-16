@@ -1,13 +1,13 @@
 <div class="location-show">
 
     <div class="side-bar">
-            <h1>Current Weather</h1>
-            <div id="weather-info"></div>
-            <div id="map"></div>
+        <h1>Current Weather</h1>
+        <div id="weather-info"></div>
+        <div id="map"></div>
     </div>
 
     <div class="main-content">
-            <h1><i class="fa fa-map-marker" aria-hidden="true"></i> {{vm.location.name}}</h1>
+        <h1><i class="fa fa-map-marker" aria-hidden="true"></i> {{vm.location.name}}</h1>
         <div class="inline">
             <button class="createactivity" ng-click="vm.addActivity()">Add Activity</button>
             <div>
@@ -21,44 +21,37 @@
                     </select>
                 </div>
                 <div class="search">
-                <i class="fa fa-search" aria-hidden="true"></i> <input placeholder="Search" ng-model="vm.activityFilter" />
-              </div>
+                    <i class="fa fa-search" aria-hidden="true"></i> <input placeholder="Search" ng-model="vm.activityFilter" />
+                </div>
             </div>
         </div>
 
-         <!-- | sortBy: activity.upvote desc -->
         <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter} | filter: vm.activityFilter | orderBy: '-upvote'">
 
             <a data-ui-sref="activity({location_id:activity.location_id, activity_id: activity.id})">
                 <div class="activities-list">
-                        <div class="photo-div" style="background-image: url('{{activity.photo_url}}')"></div>
-                            <h3>{{activity.name}}</h3>
-                            <p>{{activity.address}}</p>
-<<<<<<< HEAD
-                            <p>{{activity.category}}</p>
-                        </div>
-                    </div>
-                    <div class="upvote">
-                      <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-click="vm.upVote($event, activity)"></i>
-                      {{activity.upvote}}
-                    </div>
-=======
-                        <div class="category-text">
-                          <span>{{activity.category}}</span>
-                        </div>
+                    <div class="photo-div" style="background-image: url('{{activity.photo_url}}')"></div>
+                    <h3>{{activity.name}}</h3>
+                    <p>{{activity.address}}</p>
 
->>>>>>> b8f3c5842ea3e881592bf6a858c38d9200fdc50f
+                    <p>{{activity.category}}</p>
                 </div>
-
-            </a>
         </div>
+        <div class="upvote">
+            <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-click="vm.upVote($event, activity)"></i> {{activity.upvote}}
+        </div>
+
     </div>
+
+    </a>
+</div>
+</div>
 </div>
 
 
 
-        <!-- Comment: When I create div box images of the categories later. -->
-        <!-- <div>
+<!-- Comment: When I create div box images of the categories later. -->
+<!-- <div>
   Filters:
   <span ng-click="vm.categoryFilter='Food'">Food</span>
 </div>
