@@ -28,8 +28,8 @@
             </div>
         </div>
 
-
-        <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter} | filter: vm.activityFilter">
+         <!-- | sortBy: activity.upvote desc -->
+        <div ng-repeat="activity in vm.activities | filter: {category: vm.categoryFilter} | filter: vm.activityFilter | orderBy: '-upvote'">
 
             <a data-ui-sref="activity({location_id:activity.location_id, activity_id: activity.id})">
                 <div class="activities-list">
@@ -38,9 +38,13 @@
                         <div>
                             <h3>{{activity.name}}</h3>
                             <p>{{activity.address}}</p>
+                            <p>{{activity.category}}</p>
                         </div>
                     </div>
-                    <span>{{activity.category}}</span>
+                    <div class="upvote">
+                      <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-click="vm.upVote($event, activity)"></i>
+                      {{activity.upvote}}
+                    </div>
                 </div>
 
             </a>
