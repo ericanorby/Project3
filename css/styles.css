@@ -149,7 +149,9 @@ a {
   background-position: center;
   background-size: cover;
   margin-right: 20px;
+  float: left;
 }
+
 
 .activities-list {
   height: 160px;
@@ -168,10 +170,6 @@ a {
   font-size: 24px;
   margin-top: 0;
   color: black;
-}
-
-.photo-div {
-  float: left;
 }
 
 .category-text {
@@ -196,6 +194,14 @@ a {
 
 .activity-show img {
   width: 300px;
+}
+
+.upvote {
+  color: black;
+  position: absolute;
+  bottom: 0;
+  left: 205px;
+  padding-bottom: 20px;
 }
 
 .earth {
