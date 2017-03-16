@@ -38,8 +38,8 @@
                     <div class="category-text">
                         <span>{{activity.category}}</span>
                     </div>
-                    <div class="upvote">
-                        <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true" ng-click="vm.upVote($event, activity)"></i> {{activity.upvote}}
+                    <div class="upvote" ng-click="vm.upVote($event, activity)">
+                        <i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i> {{activity.upvote}}
                     </div>
                 </div>
             </a>
