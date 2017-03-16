@@ -1,6 +1,6 @@
 var env = {
   dev: 'http://localhost:3000',
-  prod: 'http://ventureforth.herokuapp.com',
+  prod: 'https://ventureforth.herokuapp.com',
   pwd: null
 }
 
@@ -16,28 +16,23 @@ angular
         "ngResource",
         "angularModalService"
     ])
-
     .config([
         "$stateProvider",
         "$urlRouterProvider",
         RouterFunction
     ])
-
     .factory("LocationFactory", ["$resource",
         LocationFactoryFunction
     ])
-
     .factory("ActivityFactory", ["$resource",
         ActivityFactoryFunction
     ])
-
     .controller("HomeController", [
         "LocationFactory",
         "$stateParams",
         "$state",
         HomeControllerFunction
     ])
-
     .controller("LocationShowController", [
         "LocationFactory",
         "ActivityFactory",
@@ -46,14 +41,13 @@ angular
         "ModalService",
         LocationShowControllerFunction
     ])
-
     .controller("ActivityShowController", [
         "ActivityFactory",
         "$stateParams",
         "ModalService",
+        "$state",
         ActivityShowControllerFunction
     ])
-
     .controller("ActivityCreateModalController", [
         "ActivityFactory",
         "$stateParams",
@@ -62,8 +56,6 @@ angular
         "activityData",
         ActivityCreateModalControllerFunction
     ])
-
-
 
 function RouterFunction($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -85,7 +77,6 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
             controller: "ActivityShowController",
             controllerAs: "vm"
         })
-
     $urlRouterProvider.otherwise('/home');
 }
 
@@ -94,7 +85,6 @@ function LocationFactoryFunction($resource) {
 }
 
 function ActivityFactoryFunction($resource) {
-
     return $resource(env.pwd + "/locations/:location_id/activities/:activity_id", {
         location_id: '@location_id',
         activity_id: '@activity_id'
@@ -114,8 +104,6 @@ function ActivityFactoryFunction($resource) {
         }
     });
 }
-
-var userInput;
 
 function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
@@ -185,7 +173,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
         console.log(results);
       });
     }
-    //find latitude and longitude of location selected (userInput)
+    //find latitude and longitude of location name
     this.getLatLong = function() {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({
@@ -195,7 +183,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
                 //AJAX request to weather underground
-                var url = `http://api.wunderground.com/api/67e285089e02a77a/conditions/q/${latitude},${longitude}.json`
+                var url = `https://api.wunderground.com/api/67e285089e02a77a/conditions/q/${latitude},${longitude}.json`
                 $.ajax({
                     url: url,
                     type: "get",
@@ -221,7 +209,7 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
           position: new google.maps.LatLng(latitude, longitude),
           map: map
         });
-      }
+    }
 }
 
 

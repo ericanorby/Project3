@@ -6,22 +6,12 @@ body {
   margin: 0 auto;
 }
 
-button {
+button, input[type="submit"] {
   font-size: 16px;
   padding: 6px 12px;
   border-radius: 5px;
   background: rgb(68, 105, 106);
   color: white;
-  margin-right: 10px;
-}
-
-input[type="submit"] {
-  font-size: 16px;
-  padding: 6px 12px;
-  border-radius: 5px;
-  background: rgb(68, 105, 106);
-  color: white;
-  margin-right: 10px;
 }
 
 #search-box {
@@ -39,11 +29,9 @@ input[type="submit"] {
   margin: 10px 0;
 }
 
-input:focus {
+input:focus, button:focus {
   outline: none;
 }
-
-
 
 header {
   text-align: center;
@@ -143,6 +131,7 @@ a {
 .inline {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -165,8 +154,11 @@ a {
   margin: 20px 0;
   border: 1px solid gray;
   box-shadow: 5px 5px 5px gray;
-  background: rgb(240,240,240);
+  background: rgb(240, 240, 240);
   position: relative;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .activities-list h3 {
@@ -180,7 +172,6 @@ a {
 }
 
 .category-text {
-  /*text-align: right;*/
   color: rgb(44, 134, 109);
   position: absolute;
   bottom: 0;
@@ -194,18 +185,6 @@ a {
   -ms-transform: scale(1.02);
   -o-transform: scale(1.02);
   transform: scale(1.02);
-}
-
-.activities-list {
-  -webkit-transition: all 0.5s ease;
-  /* Safari and Chrome */
-  -moz-transition: all 0.5s ease;
-  /* Firefox */
-  -ms-transition: all 0.5s ease;
-  /* IE 9 */
-  -o-transition: all 0.5s ease;
-  /* Opera */
-  transition: all 0.5s ease;
 }
 
 .activity-show {
@@ -254,15 +233,24 @@ a {
 .modal {
   border: 1px solid lightgray;
   border-radius: 5px;
-  padding: 15px;
+  padding: 10px 20px 40px 20px;
   box-shadow: 5px 5px 5px grey;
-  top: 25%;
+  top: 15%;
   width: 500px;
   position: fixed;
-  height: 300px;
+  /*height: 400px;*/
   background: white;
-  right: 30%;
+  right: 28%;
   z-index: 1;
+  text-align: right;
+}
+
+.modal i {
+  font-size: 20px;
+}
+
+.modal a {
+  text-align: left;
 }
 
 .modal-background {
@@ -285,17 +273,46 @@ a {
 }
 
 form {
-  margin-left: 30px;
+  margin: 0 40px;
+}
+
+.modal textarea, input[type="text"], input[type="url"] {
+  border: 1px solid lightgray;
+  font-size: 16px;
+  padding: 3px;
+  width: 75%;
+}
+
+.modal textarea {
+  resize: none;
+  height: 80px;
+  margin-top: 10px;
 }
 
 .modalheader {
   text-align: center;
 }
 
-input, select {
-  margin-bottom: 5px;
+.modal select {
+  margin-right: 20px;
+}
+
+.modal input, select {
+  margin-top: 10px;
 }
 
 .modalheader, .close {
-  color: #6290ad;
+  color: rgb(68, 105, 106);
+}
+
+/*MEDIA QUERY*/
+
+@media only screen and (max-width: 767px){
+    #earth {
+      width: 200px;
+      height: 200px;
+    }
+    header h1 {
+      font-size: 40px;
+    }
 }
