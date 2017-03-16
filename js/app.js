@@ -1,3 +1,15 @@
+var env = {
+  dev: 'http://localhost:3000',
+  prod: 'https://ventureforth.herokuapp.com',
+  pwd: null
+}
+
+if(location.origin.includes('localhost')) {
+  env.pwd = env.dev;
+} else {
+  env.pwd = env.prod;
+}
+
 angular
     .module("touristApp", [
         "ui.router",
@@ -78,12 +90,11 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
 }
 
 function LocationFactoryFunction($resource) {
-    return $resource("https://ventureforth.herokuapp.com/locations/:id.json");
+    return $resource(env.pwd + "/locations/:id.json");
 }
 
 function ActivityFactoryFunction($resource) {
-
-    return $resource("https://ventureforth.herokuapp.com/locations/:location_id/activities/:activity_id", {
+    return $resource(env.pwd + "/locations/:location_id/activities/:activity_id", {
         location_id: '@location_id',
         activity_id: '@activity_id'
     }, {
@@ -146,8 +157,10 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
     $(".earth-two").show()
 
     var vm = this;
-    this.location = LocationFactory.get({id: $stateParams.id}, () => {
-      this.getLatLong()
+    this.location = LocationFactory.get({
+        id: $stateParams.id
+    }, () => {
+        this.getLatLong()
     })
     this.activities = ActivityFactory.query({location_id: $stateParams.id})
     this.addActivity = function() {
@@ -155,9 +168,21 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
             templateUrl: "js/ng-views/activity/activity-creation-modal.html",
             controller: "ActivityCreateModalController",
             inputs: {
-              activityData: null,
+                activityData: null,
             }
         })
+    }
+    this.upVote = function(event, activity) {
+      event.preventDefault();
+      event.stopPropagation();
+      var params = {
+          location_id: $stateParams.id,
+          activity_id: activity.id
+      };
+      activity.upvote++;
+      ActivityFactory.update(params, activity, function(results) {
+        console.log(results);
+      });
     }
     //find latitude and longitude of location selected (userInput)
     this.getLatLong = function() {
@@ -212,21 +237,23 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalServ
 
     this.delete = function() {
         ActivityFactory.delete(params, function(results) {
+
             $state.go('location', {
                 id: params.location_id
             })
+
         })
 
     }
 
     this.edit = function() {
-      ModalService.showModal({
-          templateUrl: "js/ng-views/activity/activity-edit-modal.html",
-          controller: "ActivityCreateModalController",
-          inputs: {
-            activityData: vm.activityshow,
-          }
-      });
+        ModalService.showModal({
+            templateUrl: "js/ng-views/activity/activity-edit-modal.html",
+            controller: "ActivityCreateModalController",
+            inputs: {
+                activityData: vm.activityshow,
+            }
+        });
     }
 }
 
@@ -236,30 +263,30 @@ function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $s
     $scope.editMode = activityData ? true : false;
 
     if ($scope.editMode) {
-      $scope.activityName =  activityData.name,
-      $scope.activityAddress = activityData.address,
-      $scope.activityCategory = activityData.category,
-      $scope.activityPhoto = activityData.photo_url,
-      $scope.activityWebsite = activityData.website_url,
-      $scope.activityDescription = activityData.description
+        $scope.activityName = activityData.name,
+            $scope.activityAddress = activityData.address,
+            $scope.activityCategory = activityData.category,
+            $scope.activityPhoto = activityData.photo_url,
+            $scope.activityWebsite = activityData.website_url,
+            $scope.activityDescription = activityData.description
     }
 
     $scope.addActivity = function() {
         ActivityFactory.create({
             location_id: $stateParams.id
         }, getDataObj($scope), function(result) {
-          location.reload();
+            location.reload();
         })
     }
-    $scope.modifyActivity = function(){
-      var params = {
-          location_id: $stateParams.location_id,
-          activity_id: $stateParams.activity_id
-      };
+    $scope.modifyActivity = function() {
+        var params = {
+            location_id: $stateParams.location_id,
+            activity_id: $stateParams.activity_id
+        };
 
-      ActivityFactory.update(params, getDataObj($scope), function(results) {
-        location.reload();
-      });
+        ActivityFactory.update(params, getDataObj($scope), function(results) {
+            location.reload();
+        });
     }
 
     $scope.closeModal = function() {
@@ -267,14 +294,14 @@ function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $s
     }
 
     function getDataObj($scope) {
-      return data = {
-          name: $scope.activityName,
-          address: $scope.activityAddress,
-          category: $scope.activityCategory,
-          photo_url: $scope.activityPhoto,
-          website_url: $scope.activityWebsite,
-          description: $scope.activityDescription
-      }
+        return data = {
+            name: $scope.activityName,
+            address: $scope.activityAddress,
+            category: $scope.activityCategory,
+            photo_url: $scope.activityPhoto,
+            website_url: $scope.activityWebsite,
+            description: $scope.activityDescription
+        }
     }
 
 }
