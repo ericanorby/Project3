@@ -127,8 +127,8 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
 
     this.create = function() {
         if (IsplaceChange == false) {
-            $("#search-box").val('');
-            alert("Please enter valid location");
+            // alert("Please enter valid location");
+            $("#alert-box").html('Please enter a valid location.');
         } else {
             var userInput = $("#search-box").val();
             this.location.name = userInput
