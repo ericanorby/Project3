@@ -45,6 +45,7 @@ angular
         "ActivityFactory",
         "$stateParams",
         "ModalService",
+        "$state",
         ActivityShowControllerFunction
     ])
     .controller("ActivityCreateModalController", [
