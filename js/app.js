@@ -9,6 +9,8 @@ if(location.origin.includes('localhost')) {
 } else {
   env.pwd = env.prod;
 }
+// Great use of environment variables to determine API source ++
+// although not sure what pwd is meant to stand for
 
 angular
     .module("touristApp", [
@@ -21,10 +23,12 @@ angular
         "$urlRouterProvider",
         RouterFunction
     ])
-    .factory("LocationFactory", ["$resource",
+    .factory("LocationFactory", [
+        "$resource",
         LocationFactoryFunction
     ])
-    .factory("ActivityFactory", ["$resource",
+    .factory("ActivityFactory", [
+        "$resource",
         ActivityFactoryFunction
     ])
     .controller("HomeController", [
@@ -57,6 +61,8 @@ angular
         ActivityCreateModalControllerFunction
     ])
 
+    // Really excellent setup, naming conventions, and code formatting and quality
+
 function RouterFunction($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state("home", {
@@ -79,15 +85,19 @@ function RouterFunction($stateProvider, $urlRouterProvider) {
         })
     $urlRouterProvider.otherwise('/home');
 }
+// Great job bring in $urlRouterProvider to set a root route
 
 function LocationFactoryFunction($resource) {
     return $resource(env.pwd + "/locations/:id.json");
+    // you probably don't need the .json extension above since your API is set up
+    // to only serve up json and not any html views
 }
 
 function ActivityFactoryFunction($resource) {
     return $resource(env.pwd + "/locations/:location_id/activities/:activity_id", {
         location_id: '@location_id',
         activity_id: '@activity_id'
+        // Good job configuring url parameter
     }, {
         'create': {
             method: 'POST'
@@ -102,6 +112,8 @@ function ActivityFactoryFunction($resource) {
         'update': {
             method: 'PUT'
         }
+        // Not sure if you need to configure methods here other than update. The other
+        // ones should already have defaults set to the HTTP actions listed
     });
 }
 
@@ -130,6 +142,8 @@ function HomeControllerFunction(LocationFactory, $stateParams, $state) {
             // alert("Please enter valid location");
             $("#alert-box").html('Please enter a valid location.');
         } else {
+            // Maybe trigger some sort of loading icon here in case the request takes
+            // a bit of time to come back and render the show view
             var userInput = $("#search-box").val();
             this.location.name = userInput
             this.location.$save(function(location) {
@@ -199,7 +213,9 @@ function LocationShowControllerFunction(LocationFactory, ActivityFactory, $state
             }
         });
     }
-
+    // I really like the inclusion of Google Maps, but I think that it would add more,
+    // as a feature, if added to the show view as well where a user could see where an
+    // event is in the city.
     function initMap(latitude, longitude) {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 8,
@@ -245,7 +261,7 @@ function ActivityShowControllerFunction(ActivityFactory, $stateParams, ModalServ
     }
 }
 
-
+// Again, really cool implementation of modals
 function ActivityCreateModalControllerFunction(ActivityFactory, $stateParams, $scope, close, activityData, $state) {
     //checks if activityData exists
     $scope.editMode = activityData ? true : false;

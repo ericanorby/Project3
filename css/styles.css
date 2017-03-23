@@ -221,6 +221,9 @@ a {
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-direction: alternate;
+  /*maybe make animation-direction: right and find a map that has some repition of
+  continents so that the reset is not noticeable (to avoid the effect where the
+  globe switches direction)*/
 }
 
 .earth-two {
@@ -243,6 +246,8 @@ a {
     background-position-x: 210px;
   }
 }
+/*OR more specifically controll the animation (with percentages) so that it will
+reset to original position with no noticeable blink*/
 
 .modal {
   border: 1px solid lightgray;
@@ -320,7 +325,8 @@ form {
 }
 
 /*MEDIA QUERY*/
-
+/*Good start but add more styling logic here to make all of your views responsive
+instead of just the home page*/
 @media only screen and (max-width: 767px){
     #earth {
       width: 200px;
